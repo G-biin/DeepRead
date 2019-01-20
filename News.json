@@ -2,16 +2,30 @@
   "The Standard": {
     "link": "https://www.standardmedia.co.ke/business"
   },
+  "Capital Business": {
+    "link": "https://www.capitalfm.co.ke/business/"
+  },
   "Soko Directory": {
     "link": "https://sokodirectory.com/"
-  },
-  "Financial Times": {
-    "link": "https://www.ft.com/"
   },
   "TechWeez": {
     "link": "https://techweez.com/"
   },
-  "Ars Technica": {
-    "link": "http://arstechnica.com"
+  "Legal Futures": {
+    "link": "https://www.legalfutures.co.uk/news"
+  },
+  "Legal-IT Insider": {
+    "link": "https://www.legaltechnology.com/category/legal-it-newswire/"
+  },
+  "Legal Tech Professionals": {
+    "link": "https://www.legalitprofessionals.com/legal-it-news"
+  },
+  "LawSites - by Ambrogi": {
+    "link": "https://www.lawsitesblog.com/"
+  },
+  "LawNext": {
+    "link": "https://lawnext.libsyn.com/"
   }
 }
+
+ 
