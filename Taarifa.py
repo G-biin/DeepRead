@@ -25,12 +25,15 @@ non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
 now = datetime.now()
 toaster = ToastNotifier()
 
-print("Taarifa [Version 1.2.0.1] | © 2019 | All rights reserved. ")
+print("Taarifa® [Version 1.2] |  Promoting fact-checking and news literacy. ")
+copyright_=input("Type 'copyright' for more information, or press 'enter' to continue:- ")
+if copyright_ =="copyright":
+    print("Copyright © 2019 wakili.ai | All Rights Reserved.")
 print("\n")
 
 def main():
     print("Choose a command. ")
-    print("1. Digest.\n2. Mercury (BETA).\n3. Trends (BETA). ")
+    print("1. News Digest.\n2. Mercury - Fake News Monitor .\n3. Trends - Keyword search trends . ")
     print("\n")
     mat=input("Choice: ")
     print("\n")
