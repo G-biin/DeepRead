@@ -4,14 +4,13 @@ import newspaper
 from newspaper import Article
 import time
 from time import mktime, sleep
-from datetime import datetime
+from datetime import datetime, date
 from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer
 import textwrap3
 import sys
 from bs4 import BeautifulSoup
 import urllib.request
-from datetime import datetime, date
 import requests
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
@@ -25,22 +24,21 @@ non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
 now = datetime.now()
 toaster = ToastNotifier()
 
-print("DeepRead [Version 1.3] | © 2019 | All rights reserved. ")
+print("DeepRead [Version 1.3.2] | © 2019 | QuickBot Enterprises | All rights reserved. ")
 print("\n")
 
 def main():
     print("What do you want DeepRead to do for you? ")
-    print("1. Give me today's news.\n2. Analyse an article for reliability.\n3. Gather trending data of a keyword. ")
+    print("1. Fetch the news.\n2. Analyse an article.\n3. Gather key-word trending data. ")
     print("\n")
     mat=input("Choice: ")
     print("\n")
     print("-" *35)
-    req = Request("https://www.google.com/ ")
+    req = Request("https://www.biin.online/ ")
     try:
         response = urlopen(req)
     except URLError as e:
-        print("DeepRead requires an internet connection. ")
-        print("Please check and try again.")
+        print("DeepRead requires an internet connection. Please check and try again.")
         if __name__ == "__main__":
             main()
             
@@ -61,7 +59,7 @@ def main():
         
         
     if mat=="2":
-        toaster.show_toast("DeepRead Mercury uses AI to spot fake news.",
+        toaster.show_toast("DeepRead is learning how to spot fake news.",
                             " ",
                             icon_path="dr_icon.ico",
                             duration=5)
@@ -77,7 +75,7 @@ def main():
 
         else:
             print("\n")
-            print("Link validated. Now analysing article...")
+            print("The link is valid. Now analysing article...")
             article = Article(url_)
             article.download()
             article.html
@@ -106,22 +104,22 @@ def main():
             mild_obective= 0.4
             print("\n")
             if subjective>=mild_bias:
-                print("*Nutritional analysis*")
+                print("*Nutrition*")
                 print("Mild bias detected. Confirm factual information. ")
             elif subjective>=medium_bias:
-                print("*Nutritional analysis*")
+                print("*Nutrition*")
                 print("Medium bias detected. Otherwise a good read.")
             elif subjective>=extreme_bias:
-                print("*Nutritional analysis*")
+                print("*Nutrition*")
                 print("Read with extreme caution. Misinformation detected.")  
             elif subjective<=very_objective:
-                print("*Nutritional analysis*")
+                print("*Nutrition*")
                 print("This story handles the difference between news and opinion responsibly.")
             elif subjective<=good_objective:
-                print("*Nutritional analysis*")
+                print("*Nutrition*")
                 print("This story maintains the basic standards of credibility and transparency.")
             elif subjective<=mild_objective:
-                print("*Nutritional analysis*")
+                print("*Nutrition*")
                 print("This story is reliable.")
                 print("\n")
             list=textwrap3.wrap(article.text, width=95)
@@ -133,7 +131,7 @@ def main():
 
     if mat=="1":
         # Set the limit for number of articles to download
-        LIMIT = 4
+        LIMIT = 10
         data = {}
         data['newspapers'] = {}
         toaster.show_toast("News collection in progress ",
@@ -143,7 +141,7 @@ def main():
         time.sleep(1)
         
         # Loads the JSON files with news sites
-        with open('News.json') as data_file:
+        with open("News.json") as data_file:
             companies = json.load(data_file)
         for company, value in companies.items():
             print("'", company, "'")
@@ -195,24 +193,25 @@ def main():
                 very_objective= 0 or 0.1
                 good_objective= 0.2 or 0.3
                 mild_obective= 0.4
+                
                 print("\n")
                 if subjective>=mild_bias:
-                    print("*Nutritional analysis*")
+                    print("*Nutrition*")
                     print("Mild bias detected. Confirm factual information. ")
                 elif subjective>=medium_bias:
-                    print("*Nutritional analysis*")
+                    print("*Nutrition*")
                     print("Medium bias detected. Otherwise a good read.")
                 elif subjective>=extreme_bias:
-                    print("*Nutritional analysis*")
+                    print("*Nutrition*")
                     print("Read with extreme caution. Misinformation detected.")  
                 elif subjective<=very_objective:
-                    print("*Nutritional analysis*")
+                    print("*Nutrition*")
                     print("This story handles the difference between news and opinion responsibly.")
                 elif subjective<=good_objective:
-                    print("*Nutritional analysis*")
+                    print("*Nutrition*")
                     print("This story maintains the basic standards of credibility and transparency.")
                 elif subjective<=mild_objective:
-                    print("*Nutritional analysis*")
+                    print("*Nutrition*")
                     print("This story is reliable.")
                 
                 print("\n")
@@ -228,17 +227,16 @@ def main():
                 noneTypeCount = 0
                 data['newspapers'][company] = newsPaper
                 import csv                    
-                with open('News_by_DeepRead.csv', 'a', encoding='utf-8') as csv_file:
+                with open('Legal-Tech-Stories-By-DeepRead.csv', 'a', encoding='utf-8') as csv_file:
                     writer = csv.writer(csv_file)
-                    writer.writerow(['Site', "Date", "Title", 'Text', 'Link', "Nutritional_Score"])
-                    Site=Site
+                    writer.writerow(['Site', "Date", 'Text', 'Link', "Nutritional_Score"])
+                    Site=company
                     Author= article['author']
                     Date=article['date']
-                    Title= article['title']
                     Text= article['text']
                     Link= article['link']
-                    Reliability=round(subjectivity)
-                    writer.writerow([Site, Date, Title, Text, Link, Nutritional_Score])
+                    Nutritional_Score=round(subjectivity)
+                    writer.writerow([Site, Date, Text, Link, Nutritional_Score])
     main()
 if __name__ == "__main__":
     main()
